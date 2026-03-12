@@ -1,47 +1,15 @@
-const display = document.getElementById('display');
+function cambiarEstado() {
 
-/**
- * Añade caracteres a la pantalla
- * @param {string} value - El número o símbolo presionado
- */
-
-function append(value) {
-    if (value === '.' && display.value.split(/[\+\-\*\/]/).pop().includes('.')) {
-        return;
-    }
-    display.value += value;
+        /*Alerta
+        alert("Ayuda")
+        */
+        /*Title
+        document.getElementsByTagName("title")[0].innerHTML = "Nuevo Título";
+        */
+        let imagen = document.getElementById('foco');
+        if (imagen.src.match("focooff")) {
+            imagen.src = "focoon.png";
+        } else {
+            imagen.src = "focooff.png";
+        }
 }
-
-function clearDisplay() {
-    display.value = '';
-}
-
-function calculate() {
-    try {
-        if (display.value.trim() === "") return;
-        
-        const result = eval(display.value);
-
-        display.value = Number.isFinite(result) ? result : "Error";
-    } catch (error) {
-        display.value = "Error";
-        setTimeout(clearDisplay, 1500);
-    }
-}
-
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    if (/[0-9\+\-\/\*\.]/.test(key)) {
-        append(key);
-    } 
-    else if (key === 'Enter') {
-        event.preventDefault();
-        calculate();
-    } 
-    else if (key === 'Escape' || key === 'Delete') {
-        clearDisplay();
-    } 
-    else if (key === 'Backspace') {
-        display.value = display.value.slice(0, -1);
-    }
-});
